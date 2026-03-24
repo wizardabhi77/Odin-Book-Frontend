@@ -6,6 +6,7 @@ import Login from './components/Login.jsx'
 import Register from './components/Register.jsx'
 import Home from './components/Home.jsx'
 import Profile from './components/Profile.jsx'
+import Post from './components/Post.jsx'
 
 function App() {
  
@@ -17,6 +18,7 @@ function App() {
       <Route path="/register" element={<Register />}/>
       <Route path="/home" element={<Home />}/>
       <Route path="/profile" element={<Profile />}/>
+      <Route path="/post" element={<Post />}/>
     </Routes>
     
   )

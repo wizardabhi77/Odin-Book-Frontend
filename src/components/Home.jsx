@@ -2,14 +2,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Feed from './Feed.jsx';
+
 export default function Home() {
 
    
 
     const [user, setUser] = useState(null);
     const [friendsList, setFriendsList] = useState([]);
+    const [token, setToken] = useState(null);
 
-    const token = localStorage.getItem("token");
+   
 
     const navigate = useNavigate();
 
@@ -27,7 +30,7 @@ export default function Home() {
 
             setUser(user);
 
-            console.log(user);
+            
     }
 
     async function getFriends () {
@@ -47,14 +50,16 @@ export default function Home() {
 
     useEffect(()=> {
 
-        
+        setToken(localStorage.getItem("token"));
+
+        if(!token) return;
 
         getUSer();
 
         
 
         getFriends();
-    }, [])
+    }, [token])
 
     async function handleLogout() {
 
@@ -112,6 +117,8 @@ export default function Home() {
         getFriends();
     }
 
+    
+
     if(!user) return <h1>LOADING...</h1>
 
     return (
@@ -121,6 +128,8 @@ export default function Home() {
             <h2>WELCOME {user.username}</h2>
 
             <button onClick={()=> navigate("/profile")}>PROFILE</button> <br /> <br />
+
+            <button onClick={()=> navigate("/post")}>CREATE A POST</button>
 
             <h2>FRIENDS U NEED TO MAKE</h2>
             <ul>
@@ -157,6 +166,10 @@ export default function Home() {
                     )
                 })}
             </ul>
+
+
+
+            <Feed />
 
             <button onClick={handleLogout}>LOGOUT</button>
         </div>
