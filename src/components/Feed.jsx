@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
+import Comment from './Comment.jsx';
 
 export default function Feed() {
 
     const token = localStorage.getItem("token");
 
     const [feed, setFeed] = useState(null);
+    
 
     useEffect(() => {
 
@@ -47,6 +49,8 @@ export default function Feed() {
                              <p>{post.content}</p>
                              <p>Posted By {post.user.username}</p>
                              <p>Posted at { new Date (post.createdAt).toLocaleDateString()}</p>
+                             
+                             <Comment postId={post.id}/>
                         </li>
                     )
                 })}
