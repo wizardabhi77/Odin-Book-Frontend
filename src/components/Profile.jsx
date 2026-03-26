@@ -7,7 +7,15 @@ export default function Profile() {
 
     const [posts, setPosts] = useState([]);
 
+    const [user, setUser] = useState(null);
+
+    const [mode, setMode] = useState("view");
+
     const token = localStorage.getItem("token");
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
 
     useEffect(() => {
 
@@ -27,7 +35,54 @@ export default function Profile() {
         }
 
         getPosts();
-    })
+
+        async function getUSer () {
+            
+            const res = await fetch("http://localhost:5050/user",{
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization : "Bearer " + token 
+                },
+                });
+
+            const user = await res.json();
+
+            console.log(user);
+
+            setUser(user);
+
+            
+        }
+
+        getUSer();
+    }, [token])
+
+    async function handleEdit(e) {
+        
+        e.preventDefault();
+
+        const res = await fetch("http://localhost:5050/edit", {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json",
+                Authorization: "Bearer " + token
+            },
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password
+            })
+        });
+
+        const data = await res.json();
+
+        console.log(data);
+
+        setMode("view");
+    }
+
+    
 
     async function handleDelete(postId) {
 
@@ -51,10 +106,26 @@ export default function Profile() {
 
     return (
         <div>
-            <button>EDIT</button> <br />
+           {mode === "view" ?(user? <div>
+                <h1>Username:{user.username}</h1>
+                <h1>Email:{user.email}</h1>
+            </div>
+            : <h1>Loading</h1>): 
+            <form onSubmit={handleEdit}>
+            <label htmlFor="username">USERNAME:</label>
+            <input type="text" name="username" required value={username} onChange={(e) => setUsername(e.target.value)}/> <br />
+            <label htmlFor="email">EMAIL:</label>
+            <input type="email" name="email" required value={email} onChange={(e) => setEmail(e.target.value)}/> <br />
+            <label htmlFor="password">PASSWORD:</label>
+            <input type="password" name="password" required value={password} onChange={(e) => setPassword(e.target.value)}/> <br />
+            <button type="submit">SUBMIT</button>
+            </form>
+            }
+            <button onClick={() => setMode("edit")}>EDIT</button> <br />
             <button onClick={() => navigate("/home")}>BACK TO HOME</button>
 
             <ul>
+                <h2>Your Posts</h2>
                 {posts.map((post)=> {
                     return(
                         <li key={post.id}>

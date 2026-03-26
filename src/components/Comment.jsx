@@ -67,7 +67,7 @@ export default function Comment ({ postId }) {
                     return(
                        <li key={comment.id}>
                         <h4>{comment.text}</h4>
-                        <p>By {comment.user.username}</p>
+                        <p>By {comment.user?.username}</p>
                        </li> 
                     )
                 })}
