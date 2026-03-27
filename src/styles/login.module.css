@@ -1,0 +1,140 @@
+.loginPage {
+  height: 100vh;
+  background: linear-gradient(#ff8c42, #ff4d6d, #2b1e1e);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.loginPage h1 {
+   font-family: "Courier New", monospace;
+  font-size: 48px;
+  color: #ff91d5;
+  text-align: center;
+  letter-spacing: 4px;
+  animation: flicker 1.5s infinite alternate;
+  text-shadow:
+    0 0 7px #ff91d5,
+    0 0 10px #ff91d5,
+    0 0 21px #ff91d5,
+    0 0 42px #f09,
+    0 0 82px #f09,
+    0 0 92px #f09,
+    0 0 102px #f09,
+    0 0 151px #f09;
+
+  border: 0.2rem solid #fff;
+  border-radius: 2rem;
+  padding: 0.4em;
+  box-shadow: 0 0 .2rem #fff,
+              0 0 .2rem #fff,
+              0 0 2rem #bc13fe,
+              0 0 0.8rem #bc13fe,
+              0 0 2.8rem #bc13fe,
+              inset 0 0 1.3rem #bc13fe;
+
+ padding: 20px;
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #f09,
+      0 0 80px #f09,
+      0 0 90px #f09,
+      0 0 100px #f09,
+      0 0 150px #f09;
+  }
+  20%, 24%, 55% {       
+    text-shadow: none;
+  }
+}
+
+.loginPage p {
+  text-align: center;
+  color: #ffd166;
+  letter-spacing: 2px;
+}
+
+.loginForm {
+  background: #3b2a2a;
+  padding: 40px;
+  width: 320px;
+  border-radius: 6px;
+  border: 2px solid #ff8c42;
+  box-shadow: 0 0 20px rgba(255, 140, 66, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #ffe8d6;
+}
+
+.loginForm label {
+
+  text-align: center;
+  color: #ffd166;
+  letter-spacing: 2px;
+}
+
+.loginForm input {
+  padding: 12px;
+  background: #2b1e1e;
+  border: 1px solid #ff8c42;
+  color: #ffe8d6;
+  outline: none;
+}
+
+.loginForm input:focus {
+  box-shadow: 0 0 10px #ff4d6d;
+}
+
+.loginForm button {
+  padding: 12px;
+  background: #ff8c42;
+  border: none;
+  color: #2b1e1e;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.loginForm button:hover {
+    background: #ffd166;
+}
+
+.registerBtn {
+  font-family: "Courier New", monospace;
+  font-size: 21px;
+  color: #ff91d5;
+  text-align: center;
+  letter-spacing: 4px;
+  animation: flicker 1.5s infinite alternate;
+  text-shadow:
+    0 0 3px #ff91d5,
+    0 0 6px #ff91d5,
+    0 0 12px #ff91d5,
+    0 0 21px #f09,
+    0 0 52px #f09,
+    0 0 64px #f09,
+    0 0 88px #f09,
+    0 0 110px #f09;
+
+  border: 0.2rem solid #fff;
+  border-radius: 2rem;
+  padding: 0.4em;
+  box-shadow: 0 0 .2rem #fff,
+              0 0 .2rem #fff,
+              0 0 2rem #bc13fe,
+              0 0 0.8rem #bc13fe,
+              0 0 2.8rem #bc13fe,
+              inset 0 0 1.3rem #bc13fe;
+
+ padding: 20px;
+
+}
+

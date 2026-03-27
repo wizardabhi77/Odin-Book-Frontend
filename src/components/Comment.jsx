@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+
+import styles from "../styles/comment.module.css";
 
 export default function Comment ({ postId }) {
 
@@ -57,15 +59,15 @@ export default function Comment ({ postId }) {
     
 
     return(
-        <div>
-            <form onSubmit={handleComment}>
+        <div className={styles.commentContainer}>
+            <form onSubmit={handleComment} className={styles.commentForm}>
                     <input type="text" name='comment' value={text} onChange={(e)=> setText(e.target.value)}/>
                     <button  type="submit" >COMMENT</button>
             </form>
-            <ul>
+            <ul className={styles.commentList}>
                 {(comments.length == 0)?<p>No Comments Yet</p> :comments?.map((comment) => {
                     return(
-                       <li key={comment.id}>
+                       <li key={comment.id} className={styles.comment}>
                         <h4>{comment.text}</h4>
                         <p>By {comment.user?.username}</p>
                        </li> 

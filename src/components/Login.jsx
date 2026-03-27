@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 
+import styles from '../styles/login.module.css';
+
 
 export default function Login() {
 
@@ -53,18 +55,19 @@ export default function Login() {
     }
 
     return (
-        <div>
+        <div className={styles.loginPage}>
 
-            <h1>ODIN_BOOK LOGIN</h1> <br />
-            <form onSubmit={handleLogin}>
+            <h1>LOGIN TO VICE CITY</h1> 
+
+            <form onSubmit={handleLogin} className={styles.loginForm}>
                 <label htmlFor="username">USERNAME:</label>
                 <input type="text" name="username" required value={username} onChange={(e) => setUsername(e.target.value)}/> <br />
                 <label htmlFor="password">PASSWORD:</label>
                 <input type="password" name="password" required value={password} onChange={(e) => setPassword(e.target.value)}/> <br />
-                <button type="submit">LOGIN</button>
+                <button type="submit" className="slide-btn">LOGIN</button>
             </form>
 
-            <p>Are u still not part of the gang? <button onClick={()=> navigate("/register")}>REGISTER NOW!</button></p>
+            <p>Are u still not part of the gang? <button onClick={()=> navigate("/register") } className={styles.registerBtn}>REGISTER NOW!</button></p>
 
         </div>
     )

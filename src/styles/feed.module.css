@@ -1,0 +1,99 @@
+
+.feed {
+    grid-column: 2/3;
+    grid-row: 2/3;
+
+    border: darkgoldenrod double 2px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 20px;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.feed::-webkit-scrollbar {
+  width: 8px;
+}
+
+.feed::-webkit-scrollbar-thumb {
+  background: var(--neon-orange);
+}
+
+.feed::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.postContainer {
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+   
+}
+
+.post {
+  background: #3b2a2a;
+  border: 2px solid var(--neon-orange);
+  padding: 16px;
+  margin-bottom: 16px;
+  color: var(--text-cream);
+  box-shadow: 0 0 10px rgba(255, 140, 66, 0.4);
+  transition: 0.2s;
+
+  min-height: 0;
+  min-width: 75%;
+  width: 1000px;
+
+  display: flex;
+  
+  flex-direction: column;
+}
+
+.post:hover {
+  box-shadow:
+    0 0 5px var(--neon-pink),
+    0 0 20px var(--neon-pink),
+    0 0 40px rgba(255, 77, 109, 0.5);
+  transform: translateY(-2px);
+}
+
+.title {
+    align-self: center;
+}
+
+.author {
+    align-self: flex-start;
+}
+
+.content {
+    align-self: center;
+}
+.date {
+    align-self: flex-end;
+}
+
+.like {
+
+  width: 10%;
+
+  background: transparent;
+  border: 2px solid var(--neon-pink);
+  color: var(--neon-pink);
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: 0.2s;
+
+}
+
+.like-liked {
+
+    color: var(--neon-orange);
+
+    background-color: white;
+}

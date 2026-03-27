@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import styles from '../styles/home.module.css';
+
 import Feed from './Feed.jsx';
 
 export default function Home() {
@@ -122,16 +124,22 @@ export default function Home() {
     if(!user) return <h1>LOADING...</h1>
 
     return (
-        <div>
-            <h1>HOME</h1>
+        <div className={styles.home}>
 
-            <h2>WELCOME {user.username}</h2>
+            <div className={styles.navBar}>
 
-            <button onClick={()=> navigate("/profile")}>PROFILE</button> <br /> <br />
+                <h1>HOME</h1>
 
-            <button onClick={()=> navigate("/post")}>CREATE A POST</button>
+                <h2>WELCOME {user.username}</h2>
 
-            <h2>FRIENDS U NEED TO MAKE</h2>
+                <button onClick={()=> navigate("/profile")}>PROFILE</button> 
+
+                <button onClick={()=> navigate("/post")}>CREATE A POST</button>
+            </div>
+            
+
+            <div className={styles.sideBar}>
+                <h2>FRIENDS U NEED TO MAKE</h2>
             <ul>
                 {friendsList.map((friend) => {
                     return (
@@ -167,11 +175,12 @@ export default function Home() {
                 })}
             </ul>
 
-
+             <button onClick={handleLogout}>LOGOUT</button>
+            </div>
 
             <Feed />
 
-            <button onClick={handleLogout}>LOGOUT</button>
+           
         </div>
     )
 }  
