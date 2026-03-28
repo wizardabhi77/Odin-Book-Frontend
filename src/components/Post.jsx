@@ -26,11 +26,7 @@ export default function Post() {
                 title: title,
                 content: content
             })
-        })
-
-        const data = await res.json();
-
-        console.log(data);
+        });   
 
         navigate("/home");
     }
