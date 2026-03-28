@@ -45,12 +45,12 @@ export default function Post() {
         <div className={styles.postPage}>
             <h1>CREATE A POST</h1>
         
-        <form onSubmit={handlePost} className={styles.postForm}>
+        <form className={styles.postForm}>
             <label htmlFor="title">TITLE OF THE POST:</label>
             <input type="text" name="title" value={title} onChange={(e)=> setTitle(e.target.value)}/> <br />
             <label htmlFor="content">CONTENT:</label>
             <textarea name="content" value={content} onChange={(e)=> setContent(e.target.value)}></textarea> <br />
-            <button type="submit">POST</button>
+            <button type="submit" onClick={handlePost}>POST</button>
         </form>
         <button onClick={()=> navigate("/home")}>BACK</button>
         </div>
