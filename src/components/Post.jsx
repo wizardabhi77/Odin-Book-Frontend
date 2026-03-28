@@ -31,7 +31,9 @@ export default function Post() {
 
              if (!res.ok) throw new Error("Failed to post");
 
-            navigate("/home");
+            setTimeout(() => {
+                navigate("/home");
+            }, 100);
 
         } catch (err){
 
