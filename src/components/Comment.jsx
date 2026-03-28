@@ -13,7 +13,7 @@ export default function Comment ({ postId }) {
 
         async function getComments() {
 
-            const res = await fetch(`http://localhost:5050/comment/${postId}`, {
+            const res = await fetch(`https://odin-book-backend-mbe2.onrender.com/comment/${postId}`, {
                 method: "GET",
                 headers: {
                     "Content-Type":"application/json",
@@ -23,7 +23,7 @@ export default function Comment ({ postId }) {
 
             const data = await res.json();
 
-            console.log(data);
+           
             setComments(data);
         }
 
@@ -34,7 +34,7 @@ export default function Comment ({ postId }) {
 
         e.preventDefault();
 
-        const res = await fetch("http://localhost:5050/comment/create", {
+        const res = await fetch("https://odin-book-backend-mbe2.onrender.com/comment/create", {
             method: "POST",
             headers: {
                     "Content-Type":"application/json",
@@ -61,15 +61,18 @@ export default function Comment ({ postId }) {
     return(
         <div className={styles.commentContainer}>
             <form onSubmit={handleComment} className={styles.commentForm}>
-                    <input type="text" name='comment' value={text} onChange={(e)=> setText(e.target.value)}/>
+                    <input type="text" name='comment' value={text} onChange={(e)=> setText(e.target.value)} />
                     <button  type="submit" >COMMENT</button>
             </form>
             <ul className={styles.commentList}>
                 {(comments.length == 0)?<p>No Comments Yet</p> :comments?.map((comment) => {
                     return(
                        <li key={comment.id} className={styles.comment}>
-                        <h4>{comment.text}</h4>
-                        <p>By {comment.user?.username}</p>
+                        
+                            <h4 className={styles.commentText}>{comment.text}</h4>
+                            <p className={styles.commentAuthor}>  -{comment.user?.username}</p>
+                       
+                        
                        </li> 
                     )
                 })}

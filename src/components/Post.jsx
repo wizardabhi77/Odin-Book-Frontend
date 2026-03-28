@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
+import styles from '../styles/postForm.module.css';
+
 export default function Post() {
 
     const [title, setTitle] = useState("");
@@ -14,7 +16,7 @@ export default function Post() {
 
         e.preventDefault();
 
-        const res = await fetch("http://localhost:5050/post",{
+        const res = await fetch("https://odin-book-backend-mbe2.onrender.com/post",{
             method: "POST",
             headers: {
                 "Content-Type":"application/json",
@@ -34,10 +36,10 @@ export default function Post() {
     }
 
     return (
-        <div>
+        <div className={styles.postPage}>
             <h1>CREATE A POST</h1>
         
-        <form onSubmit={handlePost}>
+        <form onSubmit={handlePost} className={styles.postForm}>
             <label htmlFor="title">TITLE OF THE POST:</label>
             <input type="text" name="title" value={title} onChange={(e)=> setTitle(e.target.value)}/> <br />
             <label htmlFor="content">CONTENT:</label>

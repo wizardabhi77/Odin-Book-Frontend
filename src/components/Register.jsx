@@ -16,7 +16,7 @@ export default function Register() {
         
         e.preventDefault();
 
-        const res = await fetch("http://localhost:5050/register", {
+        const res = await fetch("https://odin-book-backend-mbe2.onrender.com/register", {
             method: "POST",
             headers: {
                 "Content-Type" : "application/json"

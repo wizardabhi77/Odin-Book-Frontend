@@ -22,7 +22,7 @@ export default function Login() {
         try{
             
             
-        const res = await fetch("http://localhost:5050/login", {
+        const res = await fetch("https://odin-book-backend-mbe2.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"

@@ -1,0 +1,92 @@
+.postPage {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.postPage h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    background: linear-gradient(45deg, #ff4b6e, #6a5cff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.postForm {
+  display: flex;
+    flex-direction: column;
+    width: 400px;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    gap: 10px;
+
+
+}
+
+.postForm label {
+
+    margin-bottom: 20px;
+    font-size: 28px;
+    background: linear-gradient(45deg, #ff4b6e, #6a5cff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.postForm input,
+.postForm textarea {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.postForm textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.postForm input:focus,
+.postForm textarea:focus {
+    border-color: #6a5cff;
+    box-shadow: 0 0 5px rgba(106,92,255,0.3);
+}
+
+.postForm button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #ff4b6e, #6a5cff);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.postForm button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.postPage > button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    border-radius: 15px;
+    border: none;
+    background: #eee;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.postPage > button:hover {
+    background: #ddd;
+}

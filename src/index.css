@@ -11,6 +11,14 @@ body {
   
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
 :root {
   --neon-pink: #ff4d6d;
   --neon-orange: #ff8c42;
@@ -35,7 +43,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: black solid 5px;
+
 
   
 }

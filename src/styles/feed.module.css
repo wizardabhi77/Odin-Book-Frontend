@@ -3,7 +3,7 @@
     grid-column: 2/3;
     grid-row: 2/3;
 
-    border: darkgoldenrod double 2px;
+   
 
     display: flex;
     flex-direction: column;
@@ -47,12 +47,15 @@
   transition: 0.2s;
 
   min-height: 0;
-  min-width: 75%;
-  width: 1000px;
+  width: 100%;
+  max-width: 900px;
 
   display: flex;
-  
   flex-direction: column;
+}
+
+.post > * {
+  min-width: 0;
 }
 
 .post:hover {
@@ -65,35 +68,81 @@
 
 .title {
     align-self: center;
+    margin: 10px 0;
 }
 
 .author {
     align-self: flex-start;
+
+    font-size: 14px;
+    color: gray;
 }
 
 .content {
-    align-self: center;
+    width: 100%;
+    align-self: stretch;
+
+    padding: 10px;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 .date {
     align-self: flex-end;
+
+    font-size: 12px;
+    color: gray;
+}
+
+.title,
+.author,
+.date {
+    width: 100%;
 }
 
 .like {
 
-  width: 10%;
+    align-self: flex-start;
 
-  background: transparent;
-  border: 2px solid var(--neon-pink);
-  color: var(--neon-pink);
-  padding: 6px 12px;
-  cursor: pointer;
-  transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: none;
+    background: #f0f0f0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-weight: bold;
 
 }
 
-.like-liked {
+.like img {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.25s ease;
+}
 
-    color: var(--neon-orange);
+.like:hover {
+    background: #e06b83;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
 
-    background-color: white;
+.liked {
+
+    background: #ff4b6e;
+    color: white;
+
+    animation: pop 0.3s ease;
+}
+
+.liked img {
+    transform: scale(1.25);
+}
+
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
 }

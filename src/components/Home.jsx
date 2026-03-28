@@ -14,13 +14,15 @@ export default function Home() {
     const [friendsList, setFriendsList] = useState([]);
     const [token, setToken] = useState(null);
 
+    const [sideBar, setSideBar] = useState(false);
+
    
 
     const navigate = useNavigate();
 
     async function getUSer () {
             
-            const res = await fetch("http://localhost:5050/user",{
+            const res = await fetch("https://odin-book-backend-mbe2.onrender.com/user",{
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -37,7 +39,7 @@ export default function Home() {
 
     async function getFriends () {
 
-            const res = await fetch("http://localhost:5050/friends",{
+            const res = await fetch("https://odin-book-backend-mbe2.onrender.com/friends",{
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -71,7 +73,7 @@ export default function Home() {
 
     async function handleFollow(fid) {
 
-        const res = await fetch("http://localhost:5050/follow", {
+        const res = await fetch("https://odin-book-backend-mbe2.onrender.com/follow", {
             method : "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -97,7 +99,7 @@ export default function Home() {
 
     async function handleUnFollow(fid) {
 
-        const res = await fetch("http://localhost:5050/unfollow", {
+        const res = await fetch("https://odin-book-backend-mbe2.onrender.com/unfollow", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -128,55 +130,61 @@ export default function Home() {
 
             <div className={styles.navBar}>
 
-                <h1>HOME</h1>
+                <h1>VICE CITY</h1>
 
                 <h2>WELCOME {user.username}</h2>
 
-                <button onClick={()=> navigate("/profile")}>PROFILE</button> 
+                <button onClick={()=> navigate("/profile")} className={styles.profile}>PROFILE</button> 
 
-                <button onClick={()=> navigate("/post")}>CREATE A POST</button>
+                <button onClick={()=> navigate("/post")} className={styles.post}>CREATE A POST</button>
+
+                <button onClick={() => setSideBar(!sideBar)} className={styles.menu}>☰</button>
+
             </div>
             
+            {sideBar && (
+                 <div className={`${styles.sideBar} ${sideBar ? styles.open : styles.closed}`}>
+                
+                        <h2>FRIENDS U NEED TO MAKE</h2>
+                    <ul>
+                        {friendsList.map((friend) => {
+                            return (
+                                <li key={friend.id}>
+                                    <h3>{friend.username}</h3>
+                                    <button onClick={()=> handleFollow(friend.id)}>FOLLOW</button>
+                                </li>
+                            )
+                        })}
+                    </ul>
 
-            <div className={styles.sideBar}>
-                <h2>FRIENDS U NEED TO MAKE</h2>
-            <ul>
-                {friendsList.map((friend) => {
-                    return (
-                        <li key={friend.id}>
-                            <h3>{friend.username}</h3>
-                            <button onClick={()=> handleFollow(friend.id)}>FOLLOW</button>
-                        </li>
-                    )
-                })}
-            </ul>
+                    <h2>FOLLOWERS</h2>
+                    <ul>
+                        {user.followers?.map((f)=> {
+                            return (
+                                <li key={f.follower.id}>
+                                    <h3>{f.follower.username}</h3>
+                                    
+                                </li>
+                            )
+                        })}
+                    </ul>
 
-            <h2>FOLLOWERS</h2>
-            <ul>
-                {user.followers?.map((f)=> {
-                    return (
-                        <li key={f.follower.id}>
-                            <h3>{f.follower.username}</h3>
-                            
-                        </li>
-                    )
-                })}
-            </ul>
+                    <h2>FOLLOWING</h2>
+                    <ul>
+                        {user.following?.map((f) => {
+                            return (
+                                <li key={f.following.id}>
+                                    <h3>{f.following.username}</h3>
+                                    <button onClick={()=> handleUnFollow(f.following.id)}>UNFOLLOW</button>
+                                </li>
+                            )
+                        })}
+                    </ul>
 
-            <h2>FOLLOWING</h2>
-            <ul>
-                {user.following?.map((f) => {
-                    return (
-                        <li key={f.following.id}>
-                            <h3>{f.following.username}</h3>
-                            <button onClick={()=> handleUnFollow(f.following.id)}>UNFOLLOW</button>
-                        </li>
-                    )
-                })}
-            </ul>
-
-             <button onClick={handleLogout}>LOGOUT</button>
+                    <button onClick={handleLogout}>LOGOUT</button>
             </div>
+            )}
+           
 
             <Feed />
 

@@ -17,7 +17,7 @@ export default function Feed() {
 
         async function getFeed() {
 
-            const res = await fetch("http://localhost:5050/feed", {
+            const res = await fetch("https://odin-book-backend-mbe2.onrender.com/feed", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export default function Feed() {
 
             const data = await res.json();
 
-            console.log(data);
+           
 
             setFeed(data);
 
@@ -49,7 +49,7 @@ export default function Feed() {
 
         
 
-        const res = await fetch(`http://localhost:5050/${url}`, {
+        const res = await fetch(`https://odin-book-backend-mbe2.onrender.com/${url}`, {
             method: "POST",
             headers: {
                     "Content-Type": "application/json",
@@ -94,8 +94,11 @@ export default function Feed() {
                              <h2 className={styles.title}>{post.title}</h2>
                              <p className={styles.content}>{post.content}</p>
                              
-                             <p classname={styles.date}>Posted at { new Date (post.createdAt).toLocaleDateString()}</p>
-                             <button onClick={()=> handleLike(post.id)} className={styles.like}><img src={likeIcon} className={likedPosts.includes(post.id)? "like-liked": "like"}/><h2>{post.likes}</h2></button>
+                             <p className={styles.date}>Posted at { new Date (post.createdAt).toLocaleDateString()}</p>
+                             <button onClick={()=> handleLike(post.id)} className={`${styles.like} ${likedPosts.includes(post.id) ? styles.liked : ""}`}>
+                                <img src={likeIcon} />
+                                <h2>{post.likes}</h2>
+                             </button>
                              <Comment postId={post.id}/>
                         </li>
                     )

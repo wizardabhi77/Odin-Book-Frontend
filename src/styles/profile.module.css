@@ -1,0 +1,151 @@
+.profile {
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 20px;
+
+    
+}
+
+.profile h1 {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-align: center;
+}
+
+.feed {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    padding: 20px;
+    overflow-y: auto;
+    min-height: 0;
+
+    gap: 15px;
+}
+
+.feed::-webkit-scrollbar {
+  width: 8px;
+}
+
+.feed::-webkit-scrollbar-thumb {
+  background: var(--neon-orange);
+}
+
+.feed::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.post {
+  background: #3b2a2a;
+  border: 2px solid var(--neon-orange);
+  padding: 16px;
+  margin-bottom: 16px;
+  color: var(--text-cream);
+  box-shadow: 0 0 10px rgba(255, 140, 66, 0.4);
+  transition: 0.2s;
+
+  min-height: 0;
+  width: 100%;
+  max-width: 900px;
+
+  display: flex;
+  
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.post:hover {
+  box-shadow:
+    0 0 5px var(--neon-pink),
+    0 0 20px var(--neon-pink),
+    0 0 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.title {
+    align-self: center;
+    margin: 10px 0;
+}
+
+.content {
+    align-self: center;
+}
+.date {
+    align-self: flex-end;
+
+    font-size: 12px;
+    color: gray;
+}
+
+.editForm {
+  background: #3b2a2a;
+  padding: 40px;
+  width: 320px;
+  border-radius: 6px;
+  border: 2px solid #ff8c42;
+  box-shadow: 0 0 20px rgba(255, 140, 66, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #ffe8d6;
+}
+
+.editForm label {
+
+  text-align: center;
+  color: #ffd166;
+  letter-spacing: 2px;
+}
+
+.editForm input {
+  padding: 12px;
+  background: #2b1e1e;
+  border: 1px solid #ff8c42;
+  color: #ffe8d6;
+  outline: none;
+}
+
+.editForm input:focus {
+  box-shadow: 0 0 10px #ff4d6d;
+}
+
+
+@media (max-width: 768px) {
+
+  .profile {
+    width: 100%;
+    padding: 10px;
+    gap: 12px;
+  }
+
+  .feed {
+    width: 100%;
+    padding: 10px 5px;
+    align-items: stretch; /* important */
+  }
+
+  .post {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 12px;
+    padding: 12px;
+  }
+
+  .editForm {
+    width: 100%;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .content {
+    text-align: left;
+  }
+}

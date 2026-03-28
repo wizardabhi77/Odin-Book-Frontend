@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react";
 
+import styles from '../styles/profile.module.css';
+
 export default function Profile() {
 
     const navigate = useNavigate();
@@ -21,7 +23,7 @@ export default function Profile() {
 
         async function getPosts() {
 
-            const res = await fetch("http://localhost:5050/post/user",{
+            const res = await fetch("https://odin-book-backend-mbe2.onrender.com/post/user",{
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -38,7 +40,7 @@ export default function Profile() {
 
         async function getUSer () {
             
-            const res = await fetch("http://localhost:5050/user",{
+            const res = await fetch("https://odin-book-backend-mbe2.onrender.com/user",{
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -48,7 +50,7 @@ export default function Profile() {
 
             const user = await res.json();
 
-            console.log(user);
+           
 
             setUser(user);
 
@@ -62,7 +64,7 @@ export default function Profile() {
         
         e.preventDefault();
 
-        const res = await fetch("http://localhost:5050/edit", {
+        const res = await fetch("https://odin-book-backend-mbe2.onrender.com/edit", {
             method: "POST",
             headers: {
                 "Content-Type" : "application/json",
@@ -77,7 +79,7 @@ export default function Profile() {
 
         const data = await res.json();
 
-        console.log(data);
+        
 
         setMode("view");
     }
@@ -86,7 +88,7 @@ export default function Profile() {
 
     async function handleDelete(postId) {
 
-        const res = await fetch("http://localhost:5050/post/delete",{
+        const res = await fetch("https://odin-book-backend-mbe2.onrender.com/post/delete",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -105,13 +107,13 @@ export default function Profile() {
     }
 
     return (
-        <div>
+        <div className={styles.profile}>
            {mode === "view" ?(user? <div>
                 <h1>Username:{user.username}</h1>
                 <h1>Email:{user.email}</h1>
             </div>
             : <h1>Loading</h1>): 
-            <form onSubmit={handleEdit}>
+            <form onSubmit={handleEdit} className={styles.editForm}>
             <label htmlFor="username">USERNAME:</label>
             <input type="text" name="username" required value={username} onChange={(e) => setUsername(e.target.value)}/> <br />
             <label htmlFor="email">EMAIL:</label>
@@ -121,17 +123,17 @@ export default function Profile() {
             <button type="submit">SUBMIT</button>
             </form>
             }
-            <button onClick={() => setMode("edit")}>EDIT</button> <br />
+            <button onClick={() => { mode === "view"?setMode("edit"): setMode("view")}}>{mode === "view"? "EDIT": "CANCEL"}</button> <br />
             <button onClick={() => navigate("/home")}>BACK TO HOME</button>
 
-            <ul>
+            <ul className={styles.feed}>
                 <h2>Your Posts</h2>
                 {posts.map((post)=> {
                     return(
-                        <li key={post.id}>
-                            <h1>{post.title}</h1>
-                            <p>{post.content}</p>
-                            <p>Created at {new Date(post.createdAt).toLocaleDateString()}</p>
+                        <li key={post.id} className={styles.post}>
+                            <h1 className={styles.title}>{post.title}</h1>
+                            <p className={styles.content}>{post.content}</p>
+                            <p className={styles.date}>Created at {new Date(post.createdAt).toLocaleDateString()}</p>
                             <button onClick={()=> handleDelete(post.id)}>DELETE</button>
                         </li>
                     )
