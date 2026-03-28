@@ -16,19 +16,29 @@ export default function Post() {
 
         e.preventDefault();
 
-        const res = await fetch("https://odin-book-backend-mbe2.onrender.com/post",{
-            method: "POST",
-            headers: {
-                "Content-Type":"application/json",
-                Authorization: "Bearer " + token
-            },
-            body: JSON.stringify({
-                title: title,
-                content: content
-            })
-        });   
+        try {
+                const res = await fetch("https://odin-book-backend-mbe2.onrender.com/post",{
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json",
+                    Authorization: "Bearer " + token
+                },
+                body: JSON.stringify({
+                    title: title,
+                    content: content
+                })
+            });   
 
-        navigate("/home");
+             if (!res.ok) throw new Error("Failed to post");
+
+            navigate("/home");
+
+        } catch (err){
+
+            console.log(err);
+        }
+
+          
     }
 
     return (
