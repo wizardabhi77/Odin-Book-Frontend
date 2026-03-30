@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { jwtDecode } from 'jwt-decode';
+
 import Comment from './Comment.jsx';
 
 import styles from '../styles/feed.module.css';
@@ -7,6 +9,10 @@ import likeIcon from '../assets/like-button.svg';
 export default function Feed() {
 
     const token = localStorage.getItem("token");
+
+    const decoded =  jwtDecode(token);
+
+    const userId = decoded.id;
 
     const [feed, setFeed] = useState(null);
 
@@ -32,12 +38,17 @@ export default function Feed() {
 
             setFeed(data);
 
+            const liked = data.filter(post => post.likes.some(like => like.userId === userId))
+                                .map(post=> post.id);
+
+            setLikedPosts(liked);
+
         }
 
         getFeed();
 
 
-    }, [token])
+    }, [token, userId])
 
     async function handleLike(postId) {
 
@@ -63,7 +74,7 @@ export default function Feed() {
         const updatedPost = await res.json();
 
         if(liked) {
-            setLikedPosts((prev) => [...prev, updatedPost.id]);
+            setLikedPosts((prev) => [...prev, postId]);
         }
         else {
             
@@ -72,9 +83,11 @@ export default function Feed() {
         } 
             
     
-        setFeed((post) => {
-            return post.map((post)=> post.id == updatedPost.id? updatedPost : post)
-        });
+        setFeed((prev) => 
+            prev.map(p => 
+                p.id === updatedPost.id? updatedPost : p
+            )
+        );
 
         
     }
@@ -97,8 +110,10 @@ export default function Feed() {
                              <p className={styles.date}>Posted at { new Date (post.createdAt).toLocaleDateString()}</p>
                              <button onClick={()=> handleLike(post.id)} className={`${styles.like} ${likedPosts.includes(post.id) ? styles.liked : ""}`}>
                                 <img src={likeIcon} />
-                                <h2>{post.likes}</h2>
+                                
                              </button>
+
+                             <h2>{post._count.likes}</h2>
                              <Comment postId={post.id}/>
                         </li>
                     )

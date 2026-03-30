@@ -11,6 +11,8 @@ export default function Profile() {
 
     const [user, setUser] = useState(null);
 
+    const [file, setFile ] = useState(null);
+
     const [mode, setMode] = useState("view");
 
     const token = localStorage.getItem("token");
@@ -64,17 +66,20 @@ export default function Profile() {
         
         e.preventDefault();
 
+        const formData = new FormData();
+
+        formData.append("imgPath", file);
+        formData.append("username", username);
+        formData.append("email", email);
+        formData.append("password", password);
+
         const res = await fetch("https://odin-book-backend-mbe2.onrender.com/edit", {
             method: "POST",
             headers: {
-                "Content-Type" : "application/json",
+                
                 Authorization: "Bearer " + token
             },
-            body: JSON.stringify({
-                username: username,
-                email: email,
-                password: password
-            })
+            body: formData
         });
 
         const data = await res.json();
@@ -103,17 +108,20 @@ export default function Profile() {
 
         const newPosts = posts.filter((post) => post.id !== data.id);
 
-        setPosts((prev)=> [...prev, newPosts]);
+        setPosts(newPosts);
     }
 
     return (
         <div className={styles.profile}>
            {mode === "view" ?(user? <div>
+                <img src={user.profilePic} alt="profilePic" />
                 <h1>Username:{user.username}</h1>
                 <h1>Email:{user.email}</h1>
             </div>
             : <h1>Loading</h1>): 
             <form onSubmit={handleEdit} className={styles.editForm}>
+            <label htmlFor="profilePic">Profile Picture:</label>
+            <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
             <label htmlFor="username">USERNAME:</label>
             <input type="text" name="username" required value={username} onChange={(e) => setUsername(e.target.value)}/> <br />
             <label htmlFor="email">EMAIL:</label>

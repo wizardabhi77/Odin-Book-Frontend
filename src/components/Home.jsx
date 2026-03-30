@@ -132,7 +132,7 @@ export default function Home() {
 
                 <h1>VICE CITY</h1>
 
-                <h2>WELCOME {user.username}</h2>
+                <h2>WELCOME {user.username} <img src={user.profilePic} alt="profilePic" /></h2>
 
                 <button onClick={()=> navigate("/profile")} className={styles.profile}>PROFILE</button> 
 
