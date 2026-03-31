@@ -121,7 +121,14 @@ export default function Profile() {
             : <h1>Loading</h1>): 
             <form onSubmit={handleEdit} className={styles.editForm}>
             <label htmlFor="profilePic">Profile Picture:</label>
-            <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
+            {file && (
+                <img
+                    src={URL.createObjectURL(file)}
+                    alt="preview"
+                    width="100"
+                />
+                )}
+            <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])}/>
             <label htmlFor="username">USERNAME:</label>
             <input type="text" name="username" required value={username} onChange={(e) => setUsername(e.target.value)}/> <br />
             <label htmlFor="email">EMAIL:</label>
@@ -134,8 +141,9 @@ export default function Profile() {
             <button onClick={() => { mode === "view"?setMode("edit"): setMode("view")}}>{mode === "view"? "EDIT": "CANCEL"}</button> <br />
             <button onClick={() => navigate("/home")}>BACK TO HOME</button>
 
+            <h2>Your Posts</h2>
             <ul className={styles.feed}>
-                <h2>Your Posts</h2>
+                
                 {posts.map((post)=> {
                     return(
                         <li key={post.id} className={styles.post}>

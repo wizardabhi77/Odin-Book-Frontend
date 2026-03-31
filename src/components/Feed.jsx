@@ -116,7 +116,7 @@ export default function Feed() {
                 {feed.map((post)=> {
                     return (
                         <li key={post.id} className={styles.post}>
-                             <p className={styles.author}>Posted By {post.user?.username}</p>
+                             <p className={styles.author}>Posted By {post.user?.username} <img src={post.user?.profilePic} alt="profilePic" /></p>
                              <h2 className={styles.title}>{post.title}</h2>
                              <p className={styles.content}>{post.content}</p>
                              

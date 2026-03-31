@@ -26,6 +26,10 @@
     min-height: 0;
 
     gap: 15px;
+
+    list-style: none;
+    padding: 0;
+    width: 100%;
 }
 
 .feed::-webkit-scrollbar {
@@ -58,6 +62,10 @@
   flex-direction: column;
 
   gap: 10px;
+
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 100%;
 }
 
 .post:hover {
