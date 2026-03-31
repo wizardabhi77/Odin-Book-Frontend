@@ -68,7 +68,7 @@ export default function Profile() {
 
         const formData = new FormData();
 
-        formData.append("imgPath", file);
+        formData.append("image", file);
         formData.append("username", username);
         formData.append("email", email);
         formData.append("password", password);
