@@ -85,8 +85,21 @@ export default function Feed() {
     
         setFeed((prev) => 
             prev.map(p => 
-                p.id === updatedPost.id? updatedPost : p
-            )
+               {
+                if (p.id === postId) {
+                return {
+                    ...p,
+                    _count: {
+                    ...p._count,
+                    likes: liked
+                        ? p._count.likes + 1
+                        : p._count.likes - 1,
+                    },
+                };
+                }
+                return p;
+                })
+
         );
 
         
