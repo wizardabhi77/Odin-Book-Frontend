@@ -7,7 +7,8 @@
 
     gap: 20px;
 
-    
+    height: 100vh;
+    min-height: 0;
 }
 
 .profile h1 {
@@ -19,16 +20,17 @@
 .feed {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
 
-    padding: 20px;
     overflow-y: auto;
+    flex: 1;
     min-height: 0;
 
     gap: 15px;
 
     list-style: none;
-    padding: 0;
+    margin: 0;
+    padding: 10px;
     width: 100%;
 }
 
@@ -47,25 +49,23 @@
 .post {
   background: #3b2a2a;
   border: 2px solid var(--neon-orange);
-  padding: 16px;
-  margin-bottom: 16px;
   color: var(--text-cream);
+
   box-shadow: 0 0 10px rgba(255, 140, 66, 0.4);
   transition: 0.2s;
 
-  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
   width: 100%;
   max-width: 900px;
 
-  display: flex;
-  
-  flex-direction: column;
+  padding: 16px;
+  box-sizing: border-box;
 
-  gap: 10px;
-
-  border: 1px solid #ccc;
-  padding: 10px;
-  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .post:hover {
