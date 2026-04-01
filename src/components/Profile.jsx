@@ -110,10 +110,16 @@ export default function Profile() {
         }
         )
 
+        if (!res.ok) {
+            const text = await res.text();
+            console.log("Server error:", text);
+            return;
+        }
+
         const data  = await res.json();
 
         setUser(data);
-
+        setFile(null);
         setPicmode(true);
     }
 
