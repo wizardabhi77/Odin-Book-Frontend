@@ -95,7 +95,7 @@ export default function Profile() {
         setMode("view");
     }
 
-    async function handlePic(e) {
+    async function handlePic() {
 
         const formData = new FormData();
 
@@ -113,6 +113,8 @@ export default function Profile() {
         const data  = await res.json();
 
         setUser(data);
+
+        setPicmode(true);
     }
 
     
@@ -161,7 +163,7 @@ export default function Profile() {
                         onChange={(e) => setFile(e.target.files[0])}
                     />
                   </>)}
-                <button onClick={picmode? () => setPicmode(false): handlePic}> {picmode? "CHANGE PIC" : "SUBMIT"}C</button>
+                <button onClick={picmode? () => setPicmode(false): handlePic}> {picmode? "CHANGE PIC" : "SUBMIT"}</button>
                 <h1>Username:{user.username}</h1>
                 <h1>Email:{user.email}</h1>
 
