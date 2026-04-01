@@ -15,6 +15,8 @@ export default function Profile() {
 
     const [mode, setMode] = useState("view");
 
+    const [picmode, setPicmode] = useState(true);
+
     const token = localStorage.getItem("token");
 
     const [username, setUsername] = useState("");
@@ -66,27 +68,51 @@ export default function Profile() {
         
         e.preventDefault();
 
-        const formData = new FormData();
-
-        formData.append("image", file);
-        formData.append("username", username);
-        formData.append("email", email);
-        formData.append("password", password);
+       
 
         const res = await fetch("https://odin-book-backend-mbe2.onrender.com/edit", {
             method: "POST",
             headers: {
-                
+                "Content-Type": "application/json",
                 Authorization: "Bearer " + token
             },
-            body: formData
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password
+            })
         });
+
+        if (!res.ok) {
+        const text = await res.text();
+        console.log("Server error:", text);
+        return;
+    }
 
         const data = await res.json();
 
         
-
         setMode("view");
+    }
+
+    async function handlePic(e) {
+
+        const formData = new FormData();
+
+        formData.append("image", file);
+
+        const res = await fetch("https://odin-book-backend-mbe2.onrender.com/profilePic",{
+            method: "POST",
+            headers: {
+                Authorization: "Bearer " + token
+            },
+            body: formData
+        }
+        )
+
+        const data  = await res.json();
+
+        setUser(data);
     }
 
     
@@ -113,22 +139,39 @@ export default function Profile() {
 
     return (
         <div className={styles.profile}>
-           {mode === "view" ?(user? <div>
-                <img src={user.profilePic} alt="profilePic" />
+           {mode === "view" && (user? <div>
+                {picmode?(<img src={user.profilePic} alt="profilePic" />): (
+                  
+                  <>
+                    
+                    <label htmlFor="profilePic">Profile Picture:</label>
+
+                    {file && (
+                        <img
+                            src={URL.createObjectURL(file)}
+                            alt="preview"
+                            width="100"
+                        />
+                    )}
+
+                    <input
+                        id="profilePic"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setFile(e.target.files[0])}
+                    />
+                  </>)}
+                <button onClick={() => setPicmode(!picmode)}>CHANGE PIC</button>
                 <h1>Username:{user.username}</h1>
                 <h1>Email:{user.email}</h1>
+
             </div>
-            : <h1>Loading</h1>): 
+            : <h1>Loading</h1>)}
+
+            {mode === "edit" &&
+
             <form onSubmit={handleEdit} className={styles.editForm}>
-            <label htmlFor="profilePic">Profile Picture:</label>
-            {file && (
-                <img
-                    src={URL.createObjectURL(file)}
-                    alt="preview"
-                    width="100"
-                />
-                )}
-            <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])}/>
+            
             <label htmlFor="username">USERNAME:</label>
             <input type="text" name="username" required value={username} onChange={(e) => setUsername(e.target.value)}/> <br />
             <label htmlFor="email">EMAIL:</label>
@@ -137,8 +180,11 @@ export default function Profile() {
             <input type="password" name="password" required value={password} onChange={(e) => setPassword(e.target.value)}/> <br />
             <button type="submit">SUBMIT</button>
             </form>
+            
             }
-            <button onClick={() => { mode === "view"?setMode("edit"): setMode("view")}}>{mode === "view"? "EDIT": "CANCEL"}</button> <br />
+            
+           
+            <button onClick={() => setMode(mode === "view" ? "edit" : "view")}>{mode === "view"? "EDIT": "CANCEL"}</button> <br />
             <button onClick={() => navigate("/home")}>BACK TO HOME</button>
 
             <h2>Your Posts</h2>
