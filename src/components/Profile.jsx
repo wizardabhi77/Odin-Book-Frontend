@@ -161,7 +161,7 @@ export default function Profile() {
                         onChange={(e) => setFile(e.target.files[0])}
                     />
                   </>)}
-                <button onClick={() => picmode? setPicmode(false): handlePic}> {picmode? "CHANGE PIC" : "SUBMIT"}C</button>
+                <button onClick={picmode? () => setPicmode(false): handlePic}> {picmode? "CHANGE PIC" : "SUBMIT"}C</button>
                 <h1>Username:{user.username}</h1>
                 <h1>Email:{user.email}</h1>
 
